@@ -19,8 +19,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.loyaltyapidemo.data.model.SignUpRepository
 
 /**
- * ViewModel provider factory to instantiate LoginViewModel.
- * Required given LoginViewModel has a non-empty constructor
+ * ViewModel provider factory to instantiate SignUpViewModel.
+ * Required given SignUpViewModel has a non-empty constructor
  */
 class SignUpViewModelFactory : ViewModelProvider.Factory {
 
