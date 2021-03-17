@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LoyaltyApiDemo</string>
+    <!-- Strings related to login -->
+    <string name="prompt_name">Name</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_up">Sign up</string>
+    <string name="action_sign_up_short">Sign up</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_email">Not a valid email address</string>
+    <string name="invalid_name">Name must not be empty</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="app_title">Google Pay Loyalty API Demo</string>
+    <string name="gift_logo">Gift logo</string>
+    <string name="title_activity_sign_up_confirmation">SignUpConfirmationActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="confirmation_message">This confirmation screen is for demonstration purposes only.\n\nThe recommendation is to send the user a confirmation email with a link to Save to Google Pay. The advantage of sending an email is that it also be used to verify the user\'s email address.</string>
+    <string name="save_to_phone">Save to phone</string>
+</resources>
