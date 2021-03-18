@@ -19,7 +19,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -47,11 +46,8 @@ class SignUpActivity : AppCompatActivity() {
                 // disable sign up button unless both username / password is valid
                 binding.signUp.isEnabled = signUpState.isDataValid
 
-                if (signUpState.nameError != null) {
-                    binding.name.error = getString(signUpState.nameError)
-                } else if (binding.email.text.isNotBlank() && signUpState.emailError != null) {
-                    binding.email.error = getString(signUpState.emailError)
-                }
+                binding.name.error = signUpState.nameError?.let(::getString)
+                binding.email.error = if (binding.email.text.isNotBlank()) signUpState.emailError?.let(::getString) else null
             }
         )
 
@@ -72,24 +68,11 @@ class SignUpActivity : AppCompatActivity() {
             }
         )
 
-        binding.name.apply {
-            afterTextChanged {
-                signUpViewModel.signUpDataChanged(
-                    binding.name.text.toString(),
-                    binding.email.text.toString()
-                )
-            }
-
-            setOnEditorActionListener { _, actionId, _ ->
-                when (actionId) {
-                    EditorInfo.IME_ACTION_DONE ->
-                        signUpViewModel.signUp(
-                            binding.name.text.toString(),
-                            binding.email.text.toString()
-                        )
-                }
-                false
-            }
+        binding.name.afterTextChanged {
+            signUpViewModel.signUpDataChanged(
+                binding.name.text.toString(),
+                binding.email.text.toString()
+            )
         }
 
         binding.email.afterTextChanged {
