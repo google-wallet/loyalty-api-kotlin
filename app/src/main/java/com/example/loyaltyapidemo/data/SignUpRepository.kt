@@ -20,6 +20,7 @@ import com.android.volley.toolbox.BasicNetwork
 import com.android.volley.toolbox.HurlStack
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.NoCache
+import com.example.loyaltyapidemo.BuildConfig
 import org.json.JSONObject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -52,7 +53,7 @@ class SignUpRepository {
         // Step 1: call our API to create a loyalty pass
         val response = executeJsonRequest(
             Request.Method.POST,
-            "https://gpay-loyaltyapi-demo.web.app/api/loyalty/create",
+            "${BuildConfig.API_HOST}/api/loyalty/create",
             JSONObject(
                 mapOf(
                     "name" to name,
