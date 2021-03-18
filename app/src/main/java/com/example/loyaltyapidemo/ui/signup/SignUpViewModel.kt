@@ -14,12 +14,11 @@
 
 package com.example.loyaltyapidemo.ui.signup
 
+import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import android.util.Patterns
 import androidx.lifecycle.viewModelScope
-
 import com.example.loyaltyapidemo.R
 import com.example.loyaltyapidemo.data.model.SignUpRepository
 import kotlinx.coroutines.launch

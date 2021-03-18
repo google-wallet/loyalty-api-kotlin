@@ -16,7 +16,6 @@ package com.example.loyaltyapidemo.data.model
 
 import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.Response
 import com.android.volley.toolbox.BasicNetwork
 import com.android.volley.toolbox.HurlStack
 import com.android.volley.toolbox.JsonObjectRequest
@@ -39,7 +38,8 @@ class SignUpRepository {
             start()
         }
 
-        val request = JsonObjectRequest(Request.Method.POST,
+        val request = JsonObjectRequest(
+            Request.Method.POST,
             "https://gpay-loyaltyapi-demo.web.app/api/loyalty/create",
             JSONObject(
                 mapOf(
@@ -52,7 +52,8 @@ class SignUpRepository {
             },
             { error ->
                 cont.resumeWithException(error)
-            })
+            }
+        )
 
         requestQueue.add(request)
     }
