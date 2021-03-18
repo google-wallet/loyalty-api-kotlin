@@ -42,18 +42,10 @@ class SignUpViewModel(private val signUpRepository: SignUpRepository) : ViewMode
         signUpFormMutable.value = validate(name, email)
     }
 
-    fun validate(name: String, email: String): SignUpFormState {
+    private fun validate(name: String, email: String): SignUpFormState {
         return SignUpFormState(
-            emailError = if (!isEmailValid(email)) {
-                R.string.invalid_email
-            } else {
-                null
-            },
-            nameError = if (!isNameValid(name)) {
-                R.string.invalid_name
-            } else {
-                null
-            },
+            emailError = if (!isEmailValid(email)) R.string.invalid_email else null,
+            nameError = if (!isNameValid(name)) R.string.invalid_name else null,
             isDataValid = isEmailValid(email) && isNameValid(name)
         )
     }
