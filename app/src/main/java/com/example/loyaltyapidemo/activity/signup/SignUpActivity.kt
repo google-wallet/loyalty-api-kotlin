@@ -43,7 +43,7 @@ class SignUpActivity : AppCompatActivity() {
             Observer {
                 val signUpState = it ?: return@Observer
 
-                // disable sign up button unless both username / password is valid
+                // disable sign up button unless both name and email are valid
                 binding.signUp.isEnabled = signUpState.isDataValid
 
                 binding.name.error = signUpState.nameError?.let(::getString)
@@ -56,9 +56,7 @@ class SignUpActivity : AppCompatActivity() {
             }
         )
 
-        binding.let {
-        }
-
+        // watch for signUpResult
         signUpViewModel.signUpResult.observe(
             this@SignUpActivity,
             Observer {
@@ -66,6 +64,7 @@ class SignUpActivity : AppCompatActivity() {
 
                 binding.loading.visibility = View.GONE
 
+                // start the SignUpConfirmationActivity passing in the JWT from the signUpResult
                 val intent = Intent(this, SignUpConfirmationActivity::class.java).apply {
                     putExtra("jwt", signUpResult.success!!.jwt)
                 }
@@ -89,6 +88,8 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.signUp.setOnClickListener {
             binding.loading.visibility = View.VISIBLE
+
+            // on signUp click, initiate the signUp process
             signUpViewModel.signUp(binding.name.text.toString(), binding.email.text.toString())
         }
     }

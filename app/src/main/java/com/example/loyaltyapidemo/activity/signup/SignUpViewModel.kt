@@ -31,9 +31,16 @@ class SignUpViewModel(private val signUpRepository: SignUpRepository) : ViewMode
     private val signUpResultMutable = MutableLiveData<SignUpResult>()
     val signUpResult: LiveData<SignUpResult> = signUpResultMutable
 
+    /**
+     * Calls SignUpRepository.signUp to create a new loyalty pass
+     *
+     * @return SignUpResult including the JWT used to save the loyalty pass
+     */
     fun signUp(name: String, email: String) {
         viewModelScope.launch {
+            // call SignUpRepository.signUp to obtain JWT to save the pass
             val jwt = signUpRepository.signUp(name, email)
+
             signUpResultMutable.value =
                 SignUpResult(success = SignedUpUserView(name = name, jwt = jwt))
         }
