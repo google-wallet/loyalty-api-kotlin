@@ -30,8 +30,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: dependencies
+      - name: install ktlint
         run: brew install ktlint
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            /home/linuxbrew/.linuxbrew
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - name: lint
         run: ktlint
