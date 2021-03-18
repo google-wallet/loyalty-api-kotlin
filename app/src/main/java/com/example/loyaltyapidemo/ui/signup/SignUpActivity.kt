@@ -47,7 +47,12 @@ class SignUpActivity : AppCompatActivity() {
                 binding.signUp.isEnabled = signUpState.isDataValid
 
                 binding.name.error = signUpState.nameError?.let(::getString)
-                binding.email.error = if (binding.email.text.isNotBlank()) signUpState.emailError?.let(::getString) else null
+                binding.email.error =
+                    if (binding.email.text.isNotBlank()) {
+                        signUpState.emailError?.let(::getString)
+                    } else {
+                        null
+                    }
             }
         )
 

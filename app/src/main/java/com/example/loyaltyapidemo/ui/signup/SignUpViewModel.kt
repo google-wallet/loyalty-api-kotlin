@@ -34,7 +34,8 @@ class SignUpViewModel(private val signUpRepository: SignUpRepository) : ViewMode
     fun signUp(name: String, email: String) {
         viewModelScope.launch {
             val jwt = signUpRepository.signUp(name, email)
-            signUpResultMutable.value = SignUpResult(success = SignedUpUserView(name = name, jwt = jwt))
+            signUpResultMutable.value =
+                SignUpResult(success = SignedUpUserView(name = name, jwt = jwt))
         }
     }
 
