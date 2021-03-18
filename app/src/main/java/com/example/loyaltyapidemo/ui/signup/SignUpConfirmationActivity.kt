@@ -18,22 +18,23 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.loyaltyapidemo.R
-import kotlinx.android.synthetic.main.activity_sign_up_confirmation.*
-import kotlinx.android.synthetic.main.content_sign_up_confirmation.*
+import com.example.loyaltyapidemo.databinding.ActivitySignUpConfirmationBinding
 
 class SignUpConfirmationActivity : AppCompatActivity() {
+    private lateinit var activityBinding: ActivitySignUpConfirmationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up_confirmation)
-        setSupportActionBar(toolbar)
+        activityBinding = ActivitySignUpConfirmationBinding.inflate(layoutInflater)
+        setContentView(activityBinding.root)
+
+        setSupportActionBar(activityBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         val jwt = intent.getStringExtra("jwt")
 
-        saveButton.setOnClickListener {
+        activityBinding.content.saveButton.setOnClickListener {
             val uri = Uri.parse("https://pay.google.com/gp/v/save/$jwt")
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
