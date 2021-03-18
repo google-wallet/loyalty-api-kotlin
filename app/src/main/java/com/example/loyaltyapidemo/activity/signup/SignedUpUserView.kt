@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.example.loyaltyapidemo.ui.signup
+package com.example.loyaltyapidemo.activity.signup
 
 /**
  * User details post sign up that is exposed to the UI

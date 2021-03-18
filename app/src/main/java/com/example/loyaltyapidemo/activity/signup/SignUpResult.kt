@@ -12,13 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.example.loyaltyapidemo.ui.signup
+package com.example.loyaltyapidemo.activity.signup
 
 /**
- * Data validation state of the sign up form.
+ * Sign up result : success (user details) or error message.
  */
-data class SignUpFormState(
-    val nameError: Int? = null,
-    val emailError: Int? = null,
-    val isDataValid: Boolean = false
+data class SignUpResult(
+    val success: SignedUpUserView? = null,
+    val error: Int? = null
 )

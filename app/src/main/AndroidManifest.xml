@@ -27,11 +27,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoyaltyApiDemo">
         <activity
-            android:name=".ui.signup.SignUpConfirmationActivity"
+            android:name=".activity.signup.SignUpConfirmationActivity"
             android:label="@string/title_activity_sign_up_confirmation"
             android:theme="@style/Theme.LoyaltyApiDemo.NoActionBar" />
         <activity
-            android:name=".ui.signup.SignUpActivity"
+            android:name=".activity.signup.SignUpActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
