@@ -20,9 +20,11 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.loyaltyapidemo.R
 import com.example.loyaltyapidemo.databinding.ActivitySignupBinding
 
 class SignUpActivity : AppCompatActivity() {
@@ -64,11 +66,16 @@ class SignUpActivity : AppCompatActivity() {
 
                 binding.loading.visibility = View.GONE
 
-                // start the SignUpConfirmationActivity passing in the JWT from the signUpResult
-                val intent = Intent(this, SignUpConfirmationActivity::class.java).apply {
-                    putExtra("jwt", signUpResult.success!!.jwt)
+                if (signUpResult.error != null) {
+                    Toast.makeText(applicationContext, R.string.sign_up_failed, Toast.LENGTH_LONG)
+                        .show()
+                } else {
+                    // start the SignUpConfirmationActivity passing in the JWT from the signUpResult
+                    val intent = Intent(this, SignUpConfirmationActivity::class.java).apply {
+                        putExtra("jwt", signUpResult.success!!.jwt)
+                    }
+                    startActivity(intent)
                 }
-                startActivity(intent)
             }
         )
 

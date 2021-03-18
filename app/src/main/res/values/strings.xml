@@ -30,4 +30,5 @@
     <string name="title_activity_sign_up_confirmation">SignUpConfirmationActivity</string>
     <string name="confirmation_message">This confirmation screen is for demonstration purposes only.\n\nThe recommendation is to send the user a confirmation email with a link to Save to Google Pay. The advantage of sending an email is that it also be used to verify the user\'s email address.</string>
     <string name="save_to_phone">Save to phone</string>
+    <string name="sign_up_failed">Sign up failed</string>
 </resources>

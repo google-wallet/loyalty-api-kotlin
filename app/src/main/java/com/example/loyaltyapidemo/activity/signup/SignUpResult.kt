@@ -14,10 +14,12 @@
 
 package com.example.loyaltyapidemo.activity.signup
 
+import java.lang.Exception
+
 /**
  * Sign up result : success (user details) or error message.
  */
 data class SignUpResult(
     val success: SignedUpUserView? = null,
-    val error: Int? = null
+    val error: Exception? = null
 )

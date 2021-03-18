@@ -14,6 +14,7 @@
 
 package com.example.loyaltyapidemo.activity.signup
 
+import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,8 +23,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.loyaltyapidemo.R
 import com.example.loyaltyapidemo.data.SignUpRepository
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class SignUpViewModel(private val signUpRepository: SignUpRepository) : ViewModel() {
+    private val TAG = "SignUpViewModel"
 
     private val signUpFormMutable = MutableLiveData<SignUpFormState>()
     val signUpFormState: LiveData<SignUpFormState> = signUpFormMutable
@@ -38,11 +41,16 @@ class SignUpViewModel(private val signUpRepository: SignUpRepository) : ViewMode
      */
     fun signUp(name: String, email: String) {
         viewModelScope.launch {
-            // call SignUpRepository.signUp to obtain JWT to save the pass
-            val jwt = signUpRepository.signUp(name, email)
+            try {
+                // call SignUpRepository.signUp to obtain JWT to save the pass
+                val jwt = signUpRepository.signUp(name, email)
 
-            signUpResultMutable.value =
-                SignUpResult(success = SignedUpUserView(name = name, jwt = jwt))
+                signUpResultMutable.value =
+                    SignUpResult(success = SignedUpUserView(name = name, jwt = jwt))
+            } catch (error: Exception) {
+                Log.e(TAG, "Error signing up", error)
+                signUpResultMutable.value = SignUpResult(error = error)
+            }
         }
     }
 
@@ -58,7 +66,7 @@ class SignUpViewModel(private val signUpRepository: SignUpRepository) : ViewMode
         )
     }
 
-    // A placeholder username validation check
+    // A placeholder email validation check
     private fun isEmailValid(email: String): Boolean {
         return if (email.contains('@')) {
             Patterns.EMAIL_ADDRESS.matcher(email).matches()
