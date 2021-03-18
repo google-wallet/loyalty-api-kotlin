@@ -36,8 +36,8 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-  <include
-    android:id="@+id/content"
-    layout="@layout/content_sign_up_confirmation" />
+    <include
+        android:id="@+id/content"
+        layout="@layout/content_sign_up_confirmation" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
