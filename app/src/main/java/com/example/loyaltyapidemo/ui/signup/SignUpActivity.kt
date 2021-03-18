@@ -20,13 +20,12 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
 import android.widget.EditText
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.loyaltyapidemo.R
+import kotlinx.android.synthetic.main.activity_signup.*
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -36,11 +35,6 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_signup)
-
-        val name = findViewById<EditText>(R.id.name)
-        val email = findViewById<EditText>(R.id.email)
-        val signUp = findViewById<Button>(R.id.signUp)
-        val loading = findViewById<ProgressBar>(R.id.loading)
 
         signUpViewModel = ViewModelProvider(this, SignUpViewModelFactory())
             .get(SignUpViewModel::class.java)
