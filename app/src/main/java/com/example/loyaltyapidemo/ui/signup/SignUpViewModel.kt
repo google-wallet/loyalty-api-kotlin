@@ -20,7 +20,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.loyaltyapidemo.R
-import com.example.loyaltyapidemo.data.model.SignUpRepository
+import com.example.loyaltyapidemo.data.SignUpRepository
 import kotlinx.coroutines.launch
 
 class SignUpViewModel(private val signUpRepository: SignUpRepository) : ViewModel() {

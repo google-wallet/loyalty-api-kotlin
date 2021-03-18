@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.example.loyaltyapidemo.data.model
+package com.example.loyaltyapidemo.data
 
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -26,7 +26,9 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class SignUpRepository {
-    suspend fun signUp(name: String, email: String) = suspendCoroutine<String> { cont ->
+    private val requestQueue: RequestQueue
+
+    init {
         // Instantiate the cache
         val cache = NoCache()
 
@@ -34,10 +36,19 @@ class SignUpRepository {
         val network = BasicNetwork(HurlStack())
 
         // Instantiate the RequestQueue with the cache and network. Start the queue.
-        val requestQueue = RequestQueue(cache, network).apply {
+        requestQueue = RequestQueue(cache, network).apply {
             start()
         }
+    }
 
+    /**
+     * Calls the sample app's backend API to create a loyalty pass.
+     *
+     * The API returns a token in the form of a JWT which is returned by this method
+     *
+     * @return A JWT that can be used to save the pass with Google Pay
+     */
+    suspend fun signUp(name: String, email: String) = suspendCoroutine<String> { cont ->
         val request = JsonObjectRequest(
             Request.Method.POST,
             "https://gpay-loyaltyapi-demo.web.app/api/loyalty/create",

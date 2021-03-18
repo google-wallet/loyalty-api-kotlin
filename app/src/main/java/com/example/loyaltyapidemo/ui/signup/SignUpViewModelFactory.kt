@@ -16,7 +16,7 @@ package com.example.loyaltyapidemo.ui.signup
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.loyaltyapidemo.data.model.SignUpRepository
+import com.example.loyaltyapidemo.data.SignUpRepository
 
 /**
  * ViewModel provider factory to instantiate SignUpViewModel.
