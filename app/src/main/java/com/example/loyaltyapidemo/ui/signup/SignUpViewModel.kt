@@ -25,21 +25,21 @@ import kotlinx.coroutines.launch
 
 class SignUpViewModel(private val signupRepository: SignUpRepository) : ViewModel() {
 
-    private val _signupForm = MutableLiveData<SignUpFormState>()
-    val signUpFormState: LiveData<SignUpFormState> = _signupForm
+    private val signupForm = MutableLiveData<SignUpFormState>()
+    val signUpFormState: LiveData<SignUpFormState> = signupForm
 
-    private val _signupResult = MutableLiveData<SignUpResult>()
-    val signUpResult: LiveData<SignUpResult> = _signupResult
+    private val signupResult = MutableLiveData<SignUpResult>()
+    val signUpResult: LiveData<SignUpResult> = signupResult
 
     fun signup(name: String, email: String) {
         viewModelScope.launch {
             val jwt = signupRepository.signup(name, email)
-            _signupResult.value = SignUpResult(success = SignedUpUserView(name = name, jwt = jwt))
+            signupResult.value = SignUpResult(success = SignedUpUserView(name = name, jwt = jwt))
         }
     }
 
     fun signupDataChanged(name: String, email: String) {
-        _signupForm.value = validate(name, email)
+        signupForm.value = validate(name, email)
     }
 
     fun validate(name: String, email: String): SignUpFormState {
