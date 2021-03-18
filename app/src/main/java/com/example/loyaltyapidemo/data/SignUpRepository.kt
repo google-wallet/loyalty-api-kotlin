@@ -48,8 +48,9 @@ class SignUpRepository {
      *
      * @return A JWT that can be used to save the pass with Google Pay
      */
-    suspend fun signUp(name: String, email: String) = suspendCoroutine<String> { cont ->
-        val request = JsonObjectRequest(
+    suspend fun signUp(name: String, email: String): String {
+        // Step 1: call our API to create a loyalty pass
+        val response = executeJsonRequest(
             Request.Method.POST,
             "https://gpay-loyaltyapi-demo.web.app/api/loyalty/create",
             JSONObject(
@@ -57,15 +58,27 @@ class SignUpRepository {
                     "name" to name,
                     "email" to email
                 )
-            ),
-            { response ->
-                cont.resume(response.getString("token"))
-            },
-            { error ->
-                cont.resumeWithException(error)
-            }
+            )
         )
 
-        requestQueue.add(request)
+        // Step 2: return the JWT from the token field
+        return response.getString("token")
     }
+
+    private suspend fun executeJsonRequest(method: Int, url: String, body: JSONObject? = null) =
+        suspendCoroutine<JSONObject> { cont ->
+            val request = JsonObjectRequest(
+                method,
+                url,
+                body,
+                { response ->
+                    cont.resume(response)
+                },
+                { error ->
+                    cont.resumeWithException(error)
+                }
+            )
+
+            requestQueue.add(request)
+        }
 }
