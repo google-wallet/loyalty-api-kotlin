@@ -30,7 +30,7 @@ import com.example.loyaltyapidemo.R
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var signupViewModel: SignUpViewModel
+    private lateinit var signUpViewModel: SignUpViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,37 +39,37 @@ class SignUpActivity : AppCompatActivity() {
 
         val name = findViewById<EditText>(R.id.name)
         val email = findViewById<EditText>(R.id.email)
-        val signup = findViewById<Button>(R.id.signup)
+        val signUp = findViewById<Button>(R.id.signUp)
         val loading = findViewById<ProgressBar>(R.id.loading)
 
-        signupViewModel = ViewModelProvider(this, SignUpViewModelFactory())
+        signUpViewModel = ViewModelProvider(this, SignUpViewModelFactory())
             .get(SignUpViewModel::class.java)
 
-        signupViewModel.signUpFormState.observe(
+        signUpViewModel.signUpFormState.observe(
             this@SignUpActivity,
             Observer {
-                val signupState = it ?: return@Observer
+                val signUpState = it ?: return@Observer
 
                 // disable sign up button unless both username / password is valid
-                signup.isEnabled = signupState.isDataValid
+                signUp.isEnabled = signUpState.isDataValid
 
-                if (signupState.nameError != null) {
-                    name.error = getString(signupState.nameError)
-                } else if (email.text.isNotBlank() && signupState.emailError != null) {
-                    email.error = getString(signupState.emailError)
+                if (signUpState.nameError != null) {
+                    name.error = getString(signUpState.nameError)
+                } else if (email.text.isNotBlank() && signUpState.emailError != null) {
+                    email.error = getString(signUpState.emailError)
                 }
             }
         )
 
-        signupViewModel.signUpResult.observe(
+        signUpViewModel.signUpResult.observe(
             this@SignUpActivity,
             Observer {
-                val signupResult = it ?: return@Observer
+                val signUpResult = it ?: return@Observer
 
                 loading.visibility = View.GONE
 
                 val intent = Intent(this, SignUpConfirmationActivity::class.java).apply {
-                    putExtra("jwt", signupResult.success!!.jwt)
+                    putExtra("jwt", signUpResult.success!!.jwt)
                 }
                 startActivity(intent)
             }
@@ -77,7 +77,7 @@ class SignUpActivity : AppCompatActivity() {
 
         name.apply {
             afterTextChanged {
-                signupViewModel.signupDataChanged(
+                signUpViewModel.signUpDataChanged(
                     name.text.toString(),
                     email.text.toString()
                 )
@@ -86,7 +86,7 @@ class SignUpActivity : AppCompatActivity() {
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
-                        signupViewModel.signup(
+                        signUpViewModel.signUp(
                             name.text.toString(),
                             email.text.toString()
                         )
@@ -96,15 +96,15 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         email.afterTextChanged {
-            signupViewModel.signupDataChanged(
+            signUpViewModel.signUpDataChanged(
                 name.text.toString(),
                 email.text.toString()
             )
         }
 
-        signup.setOnClickListener {
+        signUp.setOnClickListener {
             loading.visibility = View.VISIBLE
-            signupViewModel.signup(name.text.toString(), email.text.toString())
+            signUpViewModel.signUp(name.text.toString(), email.text.toString())
         }
     }
 }

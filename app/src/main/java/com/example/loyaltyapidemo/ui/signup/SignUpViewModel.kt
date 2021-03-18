@@ -23,23 +23,23 @@ import com.example.loyaltyapidemo.R
 import com.example.loyaltyapidemo.data.model.SignUpRepository
 import kotlinx.coroutines.launch
 
-class SignUpViewModel(private val signupRepository: SignUpRepository) : ViewModel() {
+class SignUpViewModel(private val signUpRepository: SignUpRepository) : ViewModel() {
 
-    private val signupForm = MutableLiveData<SignUpFormState>()
-    val signUpFormState: LiveData<SignUpFormState> = signupForm
+    private val signUpFormMutable = MutableLiveData<SignUpFormState>()
+    val signUpFormState: LiveData<SignUpFormState> = signUpFormMutable
 
-    private val signupResult = MutableLiveData<SignUpResult>()
-    val signUpResult: LiveData<SignUpResult> = signupResult
+    private val signUpResultMutable = MutableLiveData<SignUpResult>()
+    val signUpResult: LiveData<SignUpResult> = signUpResultMutable
 
-    fun signup(name: String, email: String) {
+    fun signUp(name: String, email: String) {
         viewModelScope.launch {
-            val jwt = signupRepository.signup(name, email)
-            signupResult.value = SignUpResult(success = SignedUpUserView(name = name, jwt = jwt))
+            val jwt = signUpRepository.signUp(name, email)
+            signUpResultMutable.value = SignUpResult(success = SignedUpUserView(name = name, jwt = jwt))
         }
     }
 
-    fun signupDataChanged(name: String, email: String) {
-        signupForm.value = validate(name, email)
+    fun signUpDataChanged(name: String, email: String) {
+        signUpFormMutable.value = validate(name, email)
     }
 
     fun validate(name: String, email: String): SignUpFormState {

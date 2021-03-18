@@ -26,7 +26,7 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class SignUpRepository {
-    suspend fun signup(name: String, email: String) = suspendCoroutine<String> { cont ->
+    suspend fun signUp(name: String, email: String) = suspendCoroutine<String> { cont ->
         // Instantiate the cache
         val cache = NoCache()
 
