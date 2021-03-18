@@ -30,9 +30,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: install ktlint
-        run: brew install ktlint
-
       - uses: actions/cache@v2
         with:
           path: |
@@ -42,6 +39,9 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+
+      - name: install ktlint
+        run: brew install ktlint
 
       - name: lint
         run: ktlint
