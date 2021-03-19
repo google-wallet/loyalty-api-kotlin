@@ -32,8 +32,10 @@ class SignUpConfirmationActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
+        // Step 1: read the JWT from the intent
         val jwt = intent.getStringExtra("jwt")
 
+        // Step 2: handle the saveButton onClick event
         activityBinding.content.saveButton.setOnClickListener {
             val uri = Uri.parse("https://pay.google.com/gp/v/save/$jwt")
             val intent = Intent(Intent.ACTION_VIEW, uri)

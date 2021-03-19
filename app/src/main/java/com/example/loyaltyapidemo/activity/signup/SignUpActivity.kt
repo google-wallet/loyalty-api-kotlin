@@ -69,13 +69,14 @@ class SignUpActivity : AppCompatActivity() {
                 if (signUpResult.error != null) {
                     Toast.makeText(applicationContext, R.string.sign_up_failed, Toast.LENGTH_LONG)
                         .show()
-                } else {
-                    // start the SignUpConfirmationActivity passing in the JWT from the signUpResult
-                    val intent = Intent(this, SignUpConfirmationActivity::class.java).apply {
-                        putExtra("jwt", signUpResult.success!!.jwt)
-                    }
-                    startActivity(intent)
+                    return@Observer
                 }
+
+                // Step 1: start SignUpConfirmationActivity with the JWT from the signUpResult
+                val intent = Intent(this, SignUpConfirmationActivity::class.java).apply {
+                    putExtra("jwt", signUpResult.success!!.jwt)
+                }
+                startActivity(intent)
             }
         )
 
