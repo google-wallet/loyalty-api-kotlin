@@ -14,7 +14,6 @@
 
 package com.example.loyaltyapidemo.activity.signup
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -73,10 +72,7 @@ class SignUpActivity : AppCompatActivity() {
                 }
 
                 // Step 1: start SignUpConfirmationActivity with the JWT from the signUpResult
-                val intent = Intent(this, SignUpConfirmationActivity::class.java).apply {
-                    putExtra("jwt", signUpResult.success!!.jwt)
-                }
-                startActivity(intent)
+                throw NotImplementedError("TODO: implement me")
             }
         )
 

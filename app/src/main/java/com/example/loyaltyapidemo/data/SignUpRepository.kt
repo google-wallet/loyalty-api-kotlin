@@ -14,13 +14,11 @@
 
 package com.example.loyaltyapidemo.data
 
-import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.BasicNetwork
 import com.android.volley.toolbox.HurlStack
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.NoCache
-import com.example.loyaltyapidemo.BuildConfig
 import org.json.JSONObject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -51,19 +49,10 @@ class SignUpRepository {
      */
     suspend fun signUp(name: String, email: String): String {
         // Step 1: call our API to create a loyalty pass
-        val response = executeJsonRequest(
-            Request.Method.POST,
-            "${BuildConfig.API_HOST}/api/loyalty/create",
-            JSONObject(
-                mapOf(
-                    "name" to name,
-                    "email" to email
-                )
-            )
-        )
+        throw NotImplementedError("TODO: implement me")
 
         // Step 2: return the JWT from the token field
-        return response.getString("token")
+        throw NotImplementedError("TODO: implement me")
     }
 
     private suspend fun executeJsonRequest(method: Int, url: String, body: JSONObject? = null) =

@@ -36,18 +36,5 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Step 1: Add the Google Pay image button -->
-    <ImageButton
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:background="#00FFFFFF"
-        android:contentDescription="@string/save_to_phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpConfirmationMessage"
-        app:srcCompat="@drawable/save_to_google_pay_en_light_with_stroke" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
